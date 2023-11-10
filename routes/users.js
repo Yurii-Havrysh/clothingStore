@@ -2,11 +2,14 @@ const express = require("express");
 const router = express.Router();
 const passport = require('passport');
 const bcrypt = require('bcryptjs');
+const JWT = require('../config/jwt');
 //Get Users model
 let User = require("../models/user");
 
-//Get register
+const jwtSecret = 'z&R8tWb*2k@7Y$L!9sFpCqG3eJ#nTmWp';
+const jwt = new JWT(jwtSecret);
 
+//Get register
 router.get("/register", function (req, res) {
     res.render('register', {
       title: 'Register'
@@ -53,8 +56,9 @@ router.post("/register", async function (req, res) {
               password: hash,
               admin: 0
           });
-
+          
           await newUser.save();
+          
           req.flash('success', 'You are now registered!');
           res.redirect('/users/login');
       } catch (error) {
@@ -78,10 +82,27 @@ router.get("/login", function (req, res) {
 
 router.post("/login", function (req, res, next) {
   
-  passport.authenticate('local', {
-    successRedirect: '/',
-    failureRedirect: '/users/login',
-    failureFlash: true
+  passport.authenticate('local', function (err, user, info) {
+    if (err) {
+      return next(err);
+    }
+
+    if (!user) {
+      req.flash('danger', 'Invalid username or password');
+      return res.status(401).json({ error: 'Invalid username or password' });
+    }
+
+    req.logIn(user, function(err) {
+      if (err) {
+        return next(err);
+      }
+
+      const token = jwt.encode({ userId: user.id, username: user.username });
+
+      res.cookie('jwtToken', token, { httpOnly: true });
+      res.redirect('/dashboard');
+      console.log(token);
+    })
   })(req, res, next);
 
 });
