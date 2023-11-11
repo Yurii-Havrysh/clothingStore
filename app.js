@@ -7,6 +7,7 @@ const session = require("express-session");
 const expressValidator = require("express-validator");
 const fileUpload = require("express-fileupload");
 const passport = require('passport');
+const createIndexes = require("./config/createIndex");
 
 //connect to db
 mongoose.connect(config.database);
@@ -15,6 +16,11 @@ const db = mongoose.connection;
 db.on("error", console.error.bind(console, "connection error"));
 db.once("open", function () {
   console.log("Connected to MongoDb");
+
+  createIndexes.createCategoryIndexes();
+  createIndexes.createPageIndex();
+  createIndexes.createProductIndexes();
+  createIndexes.createUserIndexes();
 });
 
 //Init app
