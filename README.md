@@ -112,7 +112,7 @@ Error:
 Success:
 ```
 {
-  "message": "Product with ID 3 has been deleted successfully."
+  "message": "Product deleted!"
 }
 ```
 Error:
@@ -121,7 +121,7 @@ Error:
   "error": "Product not found."
 }
 ```
-Users
+### Users
 ### GET /api/users
 - Request: `GET /api/users` - Retrieve a list of all users.
 - Response:
@@ -150,7 +150,7 @@ Request: GET /api/users/register
 
 Parameters:
 email (string, required) - The email of user
-username (string, required) - The username of the user.
+- username (string, required) - The username of the user.
 Response:
 ```
 {
