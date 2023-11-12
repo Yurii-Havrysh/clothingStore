@@ -149,9 +149,10 @@ Error:
 Request: GET /api/users/register
 
 Parameters:
-email (string, required) - The email of user
-- username (string, required) - The username of the user.
-Response:
+email (string, required) - The email of user,
+
+username (string, required) - The username of the user.
+- Response:
 ```
 {
   "id": 1,
@@ -205,7 +206,6 @@ Success:
   "name": Existinguser,
   "username": "existinguser",
   "email": "existinguser@example.com",
-  "token": "jwt-token"
 }
 ```
 Error:
