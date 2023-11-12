@@ -246,7 +246,7 @@ git clone [repository-https://github.com/Yurii-Havrysh/clothingStore]
 ```
 Navigate to Project Folder:
 ```
-cd sports-clothing-store
+cd clothingStore
 ```
 Install Dependencies:
 ```
