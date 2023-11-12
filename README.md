@@ -31,31 +31,32 @@ http://localhost:3000
   ...
 ]
 ```
-### GET /api/products/search
-- Request: `GET /api/products/search` - Here we search for sports clothing products based on size and color.
+### GET /api/products/category
+- Request: `GET /api/products/category` - Here we search for sports clothing products based on size and color.
 - Parameters:
-  - size (string, required) - The size of the sports clothing item.
-  - color (string, optional) - The color of the sports clothing item.
+  category: 'T-shirts' || ...
 - Response:
 ```
 [
   {
     "id": 1,
     "name": "Sports T-shirt",
-    "size": "M",
-    "color": "Red",
     "price": 29.99
   },
   ...
 ]
 ```
 ### POST /api/products
-- Request: `POST /api/products` - Here we create a new sports clothing product.
+- Request: `POST /api/admin/products/add-product` - Here we create a new sports clothing product.
 - Request Body:
 ```
 {
+  "id": 3,
   "name": "New Product",
-  "price": 39.99
+  "price": 39.99,
+  "category": hoodies,
+  "title": "Men's Black Hoodie",
+  "description": "Black Hoodie"
 }
 ```
 - Response:
@@ -64,7 +65,10 @@ Success:
 {
   "id": 3,
   "name": "New Product",
-  "price": 39.99
+  "price": 39.99,
+  "category": hoodies,
+  "title": "Men's Black Hoodie",
+  "description": "Black Hoodie"
 }
 ```
 Error:
@@ -73,15 +77,18 @@ Error:
   "error": "Invalid product data. Please provide name, size, color, and price."
 }
 ```
-### PUT /api/products/:id
-- Request: `PUT /api/products/:id` - Updating an existing sports clothing product.
+### POST /api/admin/products/edit-product/:id
+- Request: `POST /api/products/:id` - Updating an existing sports clothing product.
 - Parameters:
-id (string, required) - The ID of the product to update.
+id (id, required) - The ID of the product to update.
 - Request Body:
 ```
 {
-  "name": "Updated Product",
-  "price": 49.99
+  "title": "Updated Product",
+  "description": "some description"
+  "price": 49.99,
+  "category": "Hoodies",
+  "image": "image.png"
 }
 ```
 - Response:
@@ -98,7 +105,7 @@ Error:
 }
 ```
 ### DELETE /api/delete-product/:id
-- Request: `DELETE /api/products/:id` - Deleting a sports clothing product by ID.
+- Request: `DELETE /api/delete-product/:id` - Deleting a sports clothing product by ID.
 - Parameters:
   - id (string, required) - The ID of the product to delete.
 - Response:
