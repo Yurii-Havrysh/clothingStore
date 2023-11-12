@@ -20,6 +20,7 @@ class JWT {
 
     if (this.verifySignature(`${header}.${body}`, signature)) {
       return decodedBody;
+      
     } else {
       throw new Error('Invalid token');
     }
