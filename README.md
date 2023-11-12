@@ -32,7 +32,7 @@ http://localhost:3000
 ]
 ```
 ### GET /api/products/category
-- Request: `GET /api/products/category` - Here we search for sports clothing products based on size and color.
+- Request: `GET /api/products/category` - Here we search for sports clothing products based on category.
 - Parameters:
   category: 'T-shirts' || ...
 - Response:
